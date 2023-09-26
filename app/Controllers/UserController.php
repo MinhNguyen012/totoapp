@@ -100,24 +100,4 @@ class UserController extends BaseController
         ]);
     }
 
-    public function readUser() {
-        // $request = service('request');
-        // $key =  'minhnguyen';
-        // $header = $request->getHeader('Authorization');
-        // // if(empty($header) || empty( $header->getValue())) {
-        // //     return $this->respond([
-        // //         'status' => 401,
-        // //         'message' => 'Unauthorzed',
-        // //     ]);
-        // // }
-        // $jwt = $header->getValue();
-
-        // $userData = JWT::decode($jwt,new Key($key,'HS256'));
-        // $user = $userData->data;
-
-        // return $this->respond([
-        //     'status' => 200 ,
-        //     'users' => $user
-        // ]);
-    }
 }

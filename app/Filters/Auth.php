@@ -47,6 +47,10 @@ class Auth implements FilterInterface
             $jwt = $header->getValue();
 
             $userData = JWT::decode($jwt,new Key($key,'HS256'));
+            $userId =  $userData->data->user_id;
+            
+            $session = session();
+            $session->set('user_id', $userId);
         } catch (\Exception $error) {
             //throw $th;
             $response = service('response');
