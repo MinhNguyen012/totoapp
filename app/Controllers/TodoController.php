@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\TodoModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\I18n\Time;
 use Exception;
 
 class TodoController extends BaseController
@@ -33,7 +34,7 @@ class TodoController extends BaseController
             'description' => $this->request->getVar('description'),
             'status' => 1 ,
             'user_id' => $session->get('user_id'),
-            'created_at' =>  now('UTC +7'),
+            'created_at' => new Time('now'),
         ];
 
         $todosModel = new TodoModel();
@@ -88,4 +89,26 @@ class TodoController extends BaseController
         }
         
     }
+
+    public function update($todoId){
+        $todoModel = new TodoModel();
+        try {
+            $dataUpdate = [
+                'description' => $this->request->getVar('description'),
+            ];
+    
+            $todoModel->where('id',$todoId)->set($dataUpdate)->update();
+            return $this->respondUpdated([
+                'status' => 200,
+                'message' => 'update todo successfull',
+            ]);
+        } catch (Exception $error)
+        {
+            return $this->respondUpdated([
+                'status' => 400,
+                'error' => $error,
+            ]);
+        }
+    }
+        
 }
